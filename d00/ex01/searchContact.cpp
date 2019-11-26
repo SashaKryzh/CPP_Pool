@@ -5,22 +5,24 @@
 
 std::string truncate(std::string str, size_t width)
 {
-    if (str.length() > width)
-        return str.substr(0, width - 1) + ".";
-    return str;
+	if (str.length() > width)
+		return str.substr(0, width - 1) + ".";
+	return str;
 }
 
 void showContacts(Contact *contacts, int count)
 {
 	int input;
 
-	if (count == 0) {
+	if (count == 0)
+	{
 		std::cout << "Phonebook is empty" << std::endl;
-		return ;
+		return;
 	}
 
 	std::cout << "     Index|First Name| Last Name|  Nickname" << std::endl;
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < count; i++)
+	{
 		Contact current = contacts[i];
 		std::cout << std::setw(10) << i << '|';
 		std::cout << std::setw(10) << truncate(current.firstName, 10) << '|';
@@ -37,8 +39,26 @@ void showContacts(Contact *contacts, int count)
 	{
 		contacts[input].showContact();
 	}
-	else {
+	else
+	{
 		std::cin.clear();
 		std::cout << "Bad input. Break." << std::endl;
 	}
+}
+
+void Contact::showContact()
+{
+	std::cout << "//////////////////////////" << std::endl;
+	std::cout << firstName << std::endl;
+	std::cout << lastName << std::endl;
+	std::cout << nickname << std::endl;
+	std::cout << login << std::endl;
+	std::cout << postalAddress << std::endl;
+	std::cout << email << std::endl;
+	std::cout << phone << std::endl;
+	std::cout << birthdayDate << std::endl;
+	std::cout << favoriteMeal << std::endl;
+	std::cout << underwearColor << std::endl;
+	std::cout << darkestSecret << std::endl;
+	std::cout << "//////////////////////////" << std::endl;
 }

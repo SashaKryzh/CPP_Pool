@@ -18,22 +18,7 @@ public:
 	std::string underwearColor;
 	std::string darkestSecret;
 
-	void showContact()
-	{
-		std::cout << "//////////////////////////" << std::endl;
-		std::cout << firstName << std::endl;
-		std::cout << lastName << std::endl;
-		std::cout << nickname << std::endl;
-		std::cout << login << std::endl;
-		std::cout << postalAddress << std::endl;
-		std::cout << email << std::endl;
-		std::cout << phone << std::endl;
-		std::cout << birthdayDate << std::endl;
-		std::cout << favoriteMeal << std::endl;
-		std::cout << underwearColor << std::endl;
-		std::cout << darkestSecret << std::endl;
-		std::cout << "//////////////////////////" << std::endl;
-	}
+	void showContact(void);
 };
 
 void addContact(Contact &contact);
