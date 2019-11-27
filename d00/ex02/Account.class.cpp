@@ -147,8 +147,20 @@ void Account::_displayTimestamp()
 	std::time_t time = std::time(nullptr);
 	tm *t = localtime(&time);
 
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
 	std::cout<< "[20150406_153629]";
 	return ;
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
+	// DELETE DELETE DELETE
 
 	std::cout << "["
 			  << t->tm_year + 1900
