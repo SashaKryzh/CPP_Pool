@@ -79,9 +79,9 @@ Fixed evaluate(std::string s)
 {
 	for (size_t i = 0; i < s.length(); i++)
 	{
-		std::cout << "Ags: " << g_ags.str() << std::endl;
-		std::cout << "Ops: " << g_ops.str() << std::endl;
-		std::cout << "now: " << s[i] << std::endl;
+		// std::cout << "Ags: " << g_ags.str() << std::endl;
+		// std::cout << "Ops: " << g_ops.str() << std::endl;
+		// std::cout << "now: " << s[i] << std::endl;
 
 		if (s[i] == ' ')
 			continue;
@@ -126,7 +126,7 @@ Fixed evaluate(std::string s)
 		// Operator
 		else if (isOperator(s[i]))
 		{
-			std::cout << "isEmpty(ops):" << isEmpty(g_ops) << std::endl;
+			// std::cout << "isEmpty(ops):" << isEmpty(g_ops) << std::endl;
 			// std::cout << "g_ops.peek(): " << (!isEmpty(g_ops) ? g_ops.peek() : 5) << std::endl;
 			
 			// if (!isEmpty(g_ops))
@@ -155,7 +155,7 @@ Fixed evaluate(std::string s)
 		else
 			errorExit("Invalid character");
 
-		std::cout << std::endl;
+		// std::cout << std::endl;
 	}
 
 	// std::cout << "tyt" << std::endl;
@@ -171,7 +171,7 @@ Fixed evaluate(std::string s)
 
 	// char op;
 	// 	pop(g_ops, op);
-	std::cout << "--------------" << std::endl;
+	// std::cout << "--------------" << std::endl;
 
 	while (!isEmpty(g_ops))
 	{
@@ -209,7 +209,6 @@ int main(int ac, char *av[])
 	{
 		errorExit("Wrong number of numbers");
 	}
-	// std::cout << g_ags.str() << std::endl;
 
 	std::cout << "Result: " << answ << std::endl;
 

@@ -90,7 +90,7 @@ Fixed Fixed::operator*(const Fixed &rhs) const
 	Fixed ret;
 	signed int c = _value * rhs._value;
 
-	if (c / rhs._value != _value)
+	if (rhs._value != 0 && c / rhs._value != _value)
 	{
 		// Overflow!
 		signed int i1 = _value / DIGITS;
@@ -103,13 +103,18 @@ Fixed Fixed::operator*(const Fixed &rhs) const
 	{
 		ret.setRawBits(c / DIGITS);
 	}
-
 	return ret;
 }
 
 Fixed Fixed::operator/(const Fixed &rhs) const
 {
 	Fixed ret;
+
+	if (rhs._value == 0)
+	{
+		ret.setRawBits(INFINITY);
+		return ret;
+	}
 
 	if (_value > (1 << 21))
 	{
