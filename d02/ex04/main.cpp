@@ -3,83 +3,10 @@
 #include <string>
 
 #include "Fixed.class.hpp"
+#include "eval_expr.hpp"
 
 std::stringstream g_ags;
 std::stringstream g_ops;
-
-// void extractNumbers(std::string s)
-// {
-// 	std::stringstream ss(s);
-// 	std::string temp;
-// 	float check;
-
-// 	while (!ss.eof())
-// 	{
-// 		ss >> temp;
-// 		std::cout << temp << "\n";
-
-// 		if (std::stringstream(temp) >> check)
-// 			g_ags << temp << " ";
-
-// 		// without it last number will be twice
-// 		temp = "";
-// 	}
-// }
-
-void pop(std::stringstream &ss, float &nbr)
-{
-	std::cout << "was:" << ss.str() << "!" << std::endl;
-
-	std::string tmp;
-	ss >> tmp;
-
-	nbr = std::stof(tmp);
-	std::cout << "get:" << nbr << "!" << std::endl;
-
-	//clear
-	std::string tmp2(&ss.str()[tmp.length() + 1]);
-	ss.str(std::string());
-	ss << tmp2;
-
-	std::cout << "became:" << ss.str() << "!" << std::endl;
-}
-
-void pop(std::stringstream &ss, char &c)
-{
-	std::cout << "was:" << ss.str() << "!" << std::endl;
-
-	ss >> c;
-
-	std::cout << "get:" << c << "!" << std::endl;
-
-	//clear
-	std::string tmp(&ss.str()[2]);
-	ss.str(std::string());
-	ss << tmp;
-
-	std::cout << "became:" << ss.str() << "!" << std::endl;
-}
-
-void push(std::stringstream &ss, float nbr)
-{
-	std::string tmp(" ");
-	tmp += ss.str();
-	ss.str(std::string());
-	ss << nbr << tmp;
-}
-
-void push(std::stringstream &ss, char op)
-{
-	std::string tmp(" ");
-	tmp += ss.str();
-	ss.str(std::string());
-	ss << op << tmp;
-}
-
-bool isEmpty(std::stringstream &ss)
-{
-	return ss.str().empty();
-}
 
 void errorExit(std::string message)
 {
@@ -87,9 +14,22 @@ void errorExit(std::string message)
 	exit(0);
 }
 
+bool isEmpty(std::stringstream &ss)
+{
+	return ss.str().empty();
+}
+
 bool isOperator(char c)
 {
-	return c == '1' ? false : false;
+	if (c == '+' || c == '-' || c == '*' || c == '/')
+		return true;
+	return false;
+}
+
+void checkIsNumberPresent()
+{
+	if (isEmpty(g_ags))
+		errorExit("Wrong number of operators");
 }
 
 int precedence(char op)
@@ -114,14 +54,12 @@ float applyOp(Fixed a, Fixed b, char op)
 	case '/':
 		return (a / b).toFloat();
 	}
+	errorExit("Something wrong in applyOp()");
 	return -666;
 }
 
 void skipNbr(std::string s, size_t &i, bool rec)
 {
-	// if (rec == false)
-	// 	std::cout << &s[i] << std::endl;
-
 	while (isdigit(s[i]))
 		i += 1;
 
@@ -141,6 +79,10 @@ Fixed evaluate(std::string s)
 {
 	for (size_t i = 0; i < s.length(); i++)
 	{
+		std::cout << "Ags: " << g_ags.str() << std::endl;
+		std::cout << "Ops: " << g_ops.str() << std::endl;
+		std::cout << "now: " << s[i] << std::endl;
+
 		if (s[i] == ' ')
 			continue;
 
@@ -155,18 +97,47 @@ Fixed evaluate(std::string s)
 			tmp >> nbr;
 			push(g_ags, nbr);
 			skipNbr(s, i, false);
+			i--;
 		}
 
 		else if (s[i] == ')')
 		{
+			while(!isEmpty(g_ops) && g_ops.peek() != '(') 
+            { 
+				float f1;
+				float f2;
+				pop(g_ags, f2);
+				pop(g_ags, f1);
+
+                char op; 
+                pop(g_ops, op); 
+
+                push(g_ags, applyOp(f1, f2, op)); 
+            } 
+
+            // pop opening brace. 
+			char x;
+            if(!isEmpty(g_ops)) 
+               pop(g_ops, x);
+			else
+				errorExit("Wrong number of braces");
 		}
 
 		// Operator
 		else if (isOperator(s[i]))
 		{
-			while (!isEmpty(g_ops) &&
-				   precedence(g_ops.peek() >= precedence(s[i])))
+			std::cout << "isEmpty(ops):" << isEmpty(g_ops) << std::endl;
+			// std::cout << "g_ops.peek(): " << (!isEmpty(g_ops) ? g_ops.peek() : 5) << std::endl;
+			
+			// if (!isEmpty(g_ops))
+			// {
+			// 	std::cout << precedence(g_ops.peek()) << std::endl;
+			// 	std::cout << precedence(s[i]) << std::endl;
+			// }
+
+			while (!isEmpty(g_ops) && precedence(g_ops.peek()) >= precedence(s[i]))
 			{
+				printf("tyt");
 				float f1;
 				float f2;
 				pop(g_ags, f2);
@@ -183,6 +154,8 @@ Fixed evaluate(std::string s)
 
 		else
 			errorExit("Invalid character");
+
+		std::cout << std::endl;
 	}
 
 	// std::cout << "tyt" << std::endl;
@@ -218,7 +191,7 @@ Fixed evaluate(std::string s)
 	}
 
 	float f;
-	g_ags >> f;
+	pop(g_ags, f);
 	return Fixed(f);
 }
 
@@ -232,6 +205,10 @@ int main(int ac, char *av[])
 
 	Fixed answ = evaluate(av[1]);
 
+	if (!isEmpty(g_ags))
+	{
+		errorExit("Wrong number of numbers");
+	}
 	// std::cout << g_ags.str() << std::endl;
 
 	std::cout << "Result: " << answ << std::endl;

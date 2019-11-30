@@ -2,8 +2,8 @@
 NAME     := eval_expr
 
 # Sources and objects.
-SRCS     := main.cpp Fixed.class.cpp
-HDRS	 := Fixed.class.hpp
+SRCS     := main.cpp stack.cpp Fixed.class.cpp
+HDRS	 := Fixed.class.hpp eval_expr.hpp
 OBJS     := $(SRCS:.cpp=.o)
 
 # Define all the compiling flags.
