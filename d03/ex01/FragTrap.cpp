@@ -7,12 +7,12 @@ FragTrap::FragTrap(std::string name) : _hp(100), _maxHP(100),
                                        _ep(100), _maxEP(100), _level(1), _name(name), _meleeAttackDamage(30),
                                        _rangedAttackDamage(20), _armorDamageReduction(5)
 {
-    std::cout << FRAGTRAP << " " << _name << " is born!" << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " constructed" << std::endl;
 }
 
 FragTrap::~FragTrap()
 {
-    std::cout << FRAGTRAP << " " << _name << " is gone..." << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " destructed" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &f)
@@ -36,14 +36,14 @@ FragTrap &FragTrap::operator=(const FragTrap &f)
 
 void FragTrap::rangedAttack(std::string const &target)
 {
-    std::cout << FRAGTRAP << " " << _name << " attacks " << target
-              << " at range, causing " << _rangedAttackDamage << " points of damage ranged attack!" << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " Ranged attacks " << target
+              << " at range, causing " << _rangedAttackDamage << " points of damage!" << std::endl;
 }
 
 void FragTrap::meleeAttack(std::string const &target)
 {
-    std::cout << FRAGTRAP << " " << _name << " attacks " << target
-              << " at range, causing " << _meleeAttackDamage << " points of damage with melee attack!" << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " Melee attacks " << target
+              << " at range, causing " << _meleeAttackDamage << " points of damage!" << std::endl;
 }
 
 void FragTrap::vaulthunter_dot_exe(std::string const &target)
@@ -54,15 +54,16 @@ void FragTrap::vaulthunter_dot_exe(std::string const &target)
         "Why am I doing it?",
         "Somebody find me somebody to love!",
         "Here we are with the Princess of the Universe",
-        "Is there life on Mars?"};
+        "Is there life on Mars?",
+    };
 
     if (_ep < cost)
     {
-        std::cout << FRAGTRAP << " " << _name << " not enough energy points, have: " << _ep << std::endl;
+        std::cout << FRAG_TRAP << " " << _name << " not enough energy points, have: " << _ep << std::endl;
         return;
     }
 
-    std::cout << FRAGTRAP << " " << _name << " attacks " << target << " with " << quouts[rand() % 5] << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " attacks " << target << " with " << quouts[rand() % 5] << std::endl;
 
     _ep -= cost;
 }
@@ -79,7 +80,7 @@ void FragTrap::takeDamage(unsigned int amount)
     else
         _hp = 0;
 
-    std::cout << FRAGTRAP << " " << _name << " I have took damage, my hp: " << _hp << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " I have took damage, my hp: " << _hp << std::endl;
 }
 
 void FragTrap::beRepaired(unsigned int amount)
@@ -88,5 +89,5 @@ void FragTrap::beRepaired(unsigned int amount)
 
     _hp += amount;
 
-    std::cout << FRAGTRAP << " " << _name << " I have repaired health, my hp: " << _hp << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " I have repaired health, my hp: " << _hp << std::endl;
 }

@@ -4,15 +4,15 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(std::string name) : _hp(100), _maxHP(100),
-                                       _ep(100), _maxEP(100), _level(1), _name(name), _meleeAttackDamage(30),
-                                       _rangedAttackDamage(20), _armorDamageReduction(5)
+                                       _ep(50), _maxEP(50), _level(1), _name(name), _meleeAttackDamage(20),
+                                       _rangedAttackDamage(15), _armorDamageReduction(3)
 {
-    std::cout << SCAVTRAP << " " << _name << " is born!" << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " constructed" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << SCAVTRAP << " " << _name << " is gone..." << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " destructed" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &f)
@@ -36,14 +36,14 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &f)
 
 void ScavTrap::rangedAttack(std::string const &target)
 {
-    std::cout << SCAVTRAP << " " << _name << " attacks " << target
-              << " at range, causing " << _rangedAttackDamage << " points of damage ranged attack!" << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " Ranged attacks " << target
+              << " at range, causing " << _rangedAttackDamage << " points of damage!" << std::endl;
 }
 
 void ScavTrap::meleeAttack(std::string const &target)
 {
-    std::cout << SCAVTRAP << " " << _name << " attacks " << target
-              << " at range, causing " << _meleeAttackDamage << " points of damage with melee attack!" << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " Melee attacks " << target
+              << " at range, causing " << _meleeAttackDamage << " points of damage!" << std::endl;
 }
 
 void ScavTrap::challengeNewcomer(std::string const &target)
@@ -56,7 +56,7 @@ void ScavTrap::challengeNewcomer(std::string const &target)
         "I am sure you would not change your gender...",
     };
 
-    std::cout << SCAVTRAP << " " << _name << " challenges " << target << " with " << challenges[rand() % 5] << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " challenges " << target << " with " << challenges[rand() % 5] << std::endl;
 }
 
 void ScavTrap::takeDamage(unsigned int amount)
@@ -71,7 +71,7 @@ void ScavTrap::takeDamage(unsigned int amount)
     else
         _hp = 0;
 
-    std::cout << SCAVTRAP << " " << _name << " I have took damage, my hp: " << _hp << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " I have took damage, my hp: " << _hp << std::endl;
 }
 
 void ScavTrap::beRepaired(unsigned int amount)
@@ -80,5 +80,5 @@ void ScavTrap::beRepaired(unsigned int amount)
 
     _hp += amount;
 
-    std::cout << SCAVTRAP << " " << _name << " I have repaired health, my hp: " << _hp << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " I have repaired health, my hp: " << _hp << std::endl;
 }

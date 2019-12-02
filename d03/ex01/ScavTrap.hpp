@@ -3,7 +3,7 @@
 
 #include <string>
 
-#define SCAVTRAP "SC4V-TP"
+#define SCAV_TRAP "<SCAV-TP>"
 
 class ScavTrap
 {

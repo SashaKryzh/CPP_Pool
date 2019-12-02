@@ -3,7 +3,7 @@
 
 #include <string>
 
-#define FRAGTRAP "FR4G-TP"
+#define FRAG_TRAP "<FR4G-TP>"
 
 class FragTrap
 {
