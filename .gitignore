@@ -3,3 +3,4 @@
 a.out
 *.replace
 replacer
+.DS_Store
