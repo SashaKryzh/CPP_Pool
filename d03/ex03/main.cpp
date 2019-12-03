@@ -51,7 +51,7 @@ int main()
     s3.challengeNewcomer("Your grandpapa");
 
     // NINJA
-    std::cout << std::endl << std::endl;
+    std::cout << std::endl << "NINJA " << std::endl << std::endl;
     NinjaTrap n1("Ninja 1");
     NinjaTrap n2("Ninja 2");
 

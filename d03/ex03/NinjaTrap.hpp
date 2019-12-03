@@ -7,7 +7,7 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-#define NINJATRAP "NG4G-TP"
+#define NINJA_TRAP "NINJA-TP"
 
 class NinjaTrap: public ClapTrap
 {
