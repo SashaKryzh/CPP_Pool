@@ -4,8 +4,8 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 100,
-                                                100, 100, 1, 30,
-                                                20, 5)
+                                                50, 50, 1, 20,
+                                                15, 3)
 {
     std::cout << SCAVTRAP << " " << _name << " is born!" << std::endl;
 }

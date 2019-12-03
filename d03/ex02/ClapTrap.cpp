@@ -14,12 +14,12 @@ ClapTrap::ClapTrap(std::string name, unsigned int hp,
 											   _rangedAttackDamage(rangedDmg),
 											   _armorDamageReduction(armorDmgRed)
 {
-	std::cout << CLAPTRAP << " unit is constructed with name: " << _name << std::endl;
+	std::cout << CLAP_TRAP << " unit is constructed with name: " << _name << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << CLAPTRAP << " unit is destroyed" << std::endl;
+	std::cout << CLAP_TRAP << " unit is destroyed" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &f)
@@ -43,13 +43,13 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &f)
 
 void ClapTrap::rangedAttack(std::string const &target)
 {
-	std::cout << CLAPTRAP << " " << _name << " attacks " << target
+	std::cout << CLAP_TRAP << " " << _name << " attacks " << target
               << " at range, causing " << _rangedAttackDamage << " points of damage ranged attack!" << std::endl;
 }
 
 void ClapTrap::meleeAttack(std::string const &target)
 {
-	std::cout << CLAPTRAP << " " << _name << " attacks " << target
+	std::cout << CLAP_TRAP << " " << _name << " attacks " << target
               << " at range, causing " << _meleeAttackDamage << " points of damage with melee attack!" << std::endl;
 }
 
@@ -65,7 +65,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     else
         _hp = 0;
 
-    std::cout << CLAPTRAP << " " << _name << " I have took damage, my hp: " << _hp << std::endl;
+    std::cout << CLAP_TRAP << " " << _name << " I have took damage, my hp: " << _hp << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -74,5 +74,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 
     _hp += amount;
 
-    std::cout << CLAPTRAP << " " << _name << " I have repaired health, my hp: " << _hp << std::endl;
+    std::cout << CLAP_TRAP << " " << _name << " I have repaired health, my hp: " << _hp << std::endl;
 }

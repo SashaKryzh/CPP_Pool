@@ -1,7 +1,7 @@
 #if !defined(CLAP_TRAP_HPP)
 #define CLAP_TRAP_HPP
 
-#define CLAPTRAP "CL4P-TP"
+#define CLAP_TRAP "CLAP-TP"
 
 class ClapTrap
 {
