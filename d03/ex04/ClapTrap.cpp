@@ -24,6 +24,7 @@ ClapTrap::~ClapTrap()
 
 ClapTrap::ClapTrap(const ClapTrap &f)
 {
+	std::cout << CLAPTRAP << " copy constructor" << std::endl;
 	operator=(f);
 }
 

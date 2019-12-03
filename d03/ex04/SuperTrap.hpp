@@ -9,7 +9,7 @@
 
 #define SUPER_TRAP "SUPER-TP"
 
-class SuperTrap: virtual public FragTrap, virtual public NinjaTrap 
+class SuperTrap: public FragTrap, public NinjaTrap 
 {
 public:
     SuperTrap(std::string name);
