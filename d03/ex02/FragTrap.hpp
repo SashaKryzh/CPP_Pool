@@ -5,7 +5,7 @@
 
 #include "ClapTrap.hpp"
 
-#define FRAGTRAP "FR4G-TP"
+#define FRAG_TRAP "FR4G-TP"
 
 class FragTrap: public ClapTrap
 {

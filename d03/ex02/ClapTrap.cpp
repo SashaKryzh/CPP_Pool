@@ -29,12 +29,12 @@ ClapTrap::ClapTrap(const ClapTrap &f)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &f)
 {
+	_name = f._name;
 	_hp = f._hp;
 	_maxHP = f._maxHP;
 	_ep = f._ep;
 	_maxEP = f._maxEP;
 	_level = f._level;
-	_name = f._name;
 	_meleeAttackDamage = f._meleeAttackDamage;
 	_rangedAttackDamage = f._rangedAttackDamage;
 	_armorDamageReduction = f._armorDamageReduction;

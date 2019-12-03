@@ -8,17 +8,17 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100,
                                                 100, 100, 1, 30,
                                                 20, 5)
 {
-    std::cout << FRAGTRAP << " " << ClapTrap::_name << " is born!" << std::endl;
+    std::cout << FRAG_TRAP << " " << ClapTrap::_name << " is born!" << std::endl;
 }
 
 FragTrap::~FragTrap()
 {
-    std::cout << FRAGTRAP << " " << ClapTrap::_name << " is gone..." << std::endl;
+    std::cout << FRAG_TRAP << " " << ClapTrap::_name << " is gone..." << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &f) : ClapTrap(f)
 {
-    std::cout << FRAGTRAP << " " << ClapTrap::_name << " copy constructor" << std::endl;
+    std::cout << FRAG_TRAP << " " << ClapTrap::_name << " copy constructor" << std::endl;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &f)
@@ -39,11 +39,11 @@ void FragTrap::vaulthunter_dot_exe(std::string const &target)
 
     if (_ep < cost)
     {
-        std::cout << FRAGTRAP << " " << _name << " not enough energy points, have: " << _ep << std::endl;
+        std::cout << FRAG_TRAP << " " << _name << " not enough energy points, have: " << _ep << std::endl;
         return;
     }
 
-    std::cout << FRAGTRAP << " " << _name << " attacks " << target << " with " << quouts[rand() % 5] << std::endl;
+    std::cout << FRAG_TRAP << " " << _name << " attacks " << target << " with " << quouts[rand() % 5] << std::endl;
 
     _ep -= cost;
 }

@@ -7,17 +7,17 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 100,
                                                 50, 50, 1, 20,
                                                 15, 3)
 {
-    std::cout << SCAVTRAP << " " << _name << " is born!" << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " is born!" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << SCAVTRAP << " " << _name << " is gone..." << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " is gone..." << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &f) : ClapTrap(f)
 {
-    std::cout << SCAVTRAP << " " << _name << " copy constructor." << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " copy constructor." << std::endl;
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &f)
@@ -36,5 +36,5 @@ void ScavTrap::challengeNewcomer(std::string const &target)
         "I am sure you would not change your gender...",
     };
 
-    std::cout << SCAVTRAP << " " << _name << " challenges " << target << " with " << challenges[rand() % 5] << std::endl;
+    std::cout << SCAV_TRAP << " " << _name << " challenges " << target << " with " << challenges[rand() % 5] << std::endl;
 }

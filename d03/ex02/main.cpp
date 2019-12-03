@@ -1,7 +1,7 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-// clang++ main.cpp ScavTrap.cpp FragTrap.cpp -Wall -Wextra -Werror
+// clang++ main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp -Wall -Wextra -Werror
 
 int main()
 {
