@@ -21,6 +21,7 @@ public:
     int getDamage() const;
 
     virtual void attack() const = 0;
+    virtual AWeapon *cloneWeapon() const = 0;
 };
 
 #endif // AWEAPON_HPP

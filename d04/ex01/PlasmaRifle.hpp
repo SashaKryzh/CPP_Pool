@@ -13,6 +13,7 @@ public:
     ~PlasmaRifle();
 
     void attack() const;
+    PlasmaRifle *cloneWeapon() const;
 };
 
 #endif // PLASMA_RIFLE_HPP

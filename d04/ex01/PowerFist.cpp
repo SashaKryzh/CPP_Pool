@@ -20,3 +20,8 @@ void PowerFist::attack() const
 {
     std::cout << "* pschhh... SBAM! *" << std::endl;
 }
+
+PowerFist *PowerFist::cloneWeapon() const
+{
+    return new PowerFist(*this);
+}

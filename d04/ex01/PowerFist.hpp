@@ -13,6 +13,7 @@ public:
     ~PowerFist();
 
     void attack() const;
+    PowerFist *cloneWeapon() const;
 };
 
 #endif // POWER_FIST_HPP

@@ -20,3 +20,8 @@ void PlasmaRifle::attack() const
 {
     std::cout << "* piouuu piouuu piouuu *" << std::endl;
 }
+
+PlasmaRifle *PlasmaRifle::cloneWeapon() const
+{
+    return new PlasmaRifle(*this);
+}
