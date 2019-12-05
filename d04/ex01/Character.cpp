@@ -78,5 +78,6 @@ std::ostream &operator<<(std::ostream &os, const Character &c)
     else
         os << "is unarmed";
 
+    os << std::endl;
     return os;
 }

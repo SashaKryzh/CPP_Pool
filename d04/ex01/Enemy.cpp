@@ -32,7 +32,10 @@ int Enemy::getHP() const
 void Enemy::takeDamage(int damage)
 {
     if (damage < 0)
-        _hp -= damage;
+        return ;
+    
+    _hp -= damage;
+    
     if (_hp < 0)
         _hp = 0;
 }
