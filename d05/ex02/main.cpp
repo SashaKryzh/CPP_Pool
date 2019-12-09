@@ -27,6 +27,7 @@ int main()
         freddy.signForm(pF);
 
         Bureaucrat trump("Trump", 1);
+        trump.executeForm(rF);
         trump.signForm(pF);
         std::cout << pF;
         trump.executeForm(pF);
