@@ -1,6 +1,13 @@
 
 #include <iostream>
 
+struct DataRaw
+{
+    char s1[8];
+    int n;
+    char s2[8];
+};
+
 struct Data
 {
     std::string s1;
@@ -10,7 +17,7 @@ struct Data
 
 void *serialize()
 {
-    Data *ret = new Data;
+    DataRaw *ret = new DataRaw;
     static const char alphanum[] =
         "0123456789"
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -18,16 +25,25 @@ void *serialize()
 
     srand(time(NULL));
     for (int i = 0; i < 8; i++)
-        ret->s1 += alphanum[rand() % sizeof(alphanum)];
+    {
+        ret->s1[i] = alphanum[rand() % sizeof(alphanum)];
+        ret->s2[i] = alphanum[rand() % sizeof(alphanum)];
+    }
     ret->n = rand();
-    for (int i = 0; i < 8; i++)
-        ret->s2 += alphanum[rand() % sizeof(alphanum)];
     return ret;
 }
 
 Data *deserialize(void *raw)
 {
-    return reinterpret_cast<Data *>(raw);
+    DataRaw *tmp = reinterpret_cast<DataRaw *>(raw);
+    Data *ret = new Data;
+    for (int i = 0; i < 8; i++)
+    {
+        ret->s1 += tmp->s1[i];
+        ret->s2 += tmp->s2[i];
+    }
+    ret->n = tmp->n;
+    return ret;
 }
 
 int main()
@@ -38,6 +54,6 @@ int main()
     std::cout << data->s1 << "\n"
               << data->n << "\n"
               << data->s2 << "\n";
-    
+
     return 0;
 }
