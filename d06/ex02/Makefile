@@ -1,4 +1,4 @@
-NAME		:= serialization
+NAME		:= identifier
 
 # directories
 SRC_DIR		:= .
@@ -6,6 +6,7 @@ OBJ_DIR		:= ./obj
 
 # src / obj files
 SRC			:=	main.cpp \
+				Base.cpp \
 
 OBJ			:= $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
 

@@ -6,6 +6,7 @@ OBJ_DIR		:= ./obj
 
 # src / obj files
 SRC			:=	main.cpp \
+				SomeType.cpp \
 
 OBJ			:= $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
 

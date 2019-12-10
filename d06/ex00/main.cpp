@@ -1,6 +1,8 @@
 #include <limits>
 #include <iostream>
 
+#include "SomeType.hpp"
+
 int main(int ac, char *av[])
 {
     if (ac != 2)
@@ -9,31 +11,46 @@ int main(int ac, char *av[])
         return 0;
     }
 
-    std::string s(av[1]);
+    SomeType type(av[1]);
 
     std::cout << "char: ";
     try
     {
-        char c = static_cast<char>(std::stoi(av[1], 0, 10));
-        if (isprint(c))
-            std::cout << c << std::endl;
-        else
-            std::cout << "Non displayable\n";
+        std::cout << static_cast<char>(type) << std::endl;
     }
     catch (const std::exception &e)
     {
-        std::cout << "impossible\n";
+        std::cout << e.what() << std::endl;
     }
 
     std::cout << "int: ";
     try
     {
-        int i = std::stoi(s, 0, 10);
-        std::cout << i << std::endl;
+        std::cout << static_cast<int>(type) << std::endl;
     }
     catch (const std::exception &e)
     {
-        std::cout << "impossible\n";
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "float: ";
+    try
+    {
+        std::cout << static_cast<float>(type) << "f" << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
+
+    std::cout << "double: ";
+    try
+    {
+        std::cout << static_cast<double>(type) << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
     }
 
     return 0;
