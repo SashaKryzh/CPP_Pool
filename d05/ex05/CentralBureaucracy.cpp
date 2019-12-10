@@ -19,23 +19,6 @@ CentralBureaucracy &CentralBureaucracy::operator=(const CentralBureaucracy &src)
 {
     if (this != &src)
     {
-        // Copy blocks
-        for (int i = 0; i < 20; i++)
-        {
-            if (src.blocks_[i].getSigner() || src.blocks_[i].getExecuter())
-            {
-                blocks_[i].setIntern(*(new Intern()));
-                blocks_[i].setSigner(*(new Bureaucrat(*(src.blocks_[i].getSigner()))));
-                blocks_[i].setExecutor(*(new Bureaucrat(*(src.blocks_[i].getExecuter()))));
-            }
-        }
-        // Copy queue
-        s_queueTargets *tmp = src.queueTargets_;
-        while (tmp != nullptr)
-        {
-            queueUp(tmp->name);
-            tmp = tmp->next;
-        }
     }
     return *this;
 }
@@ -112,12 +95,12 @@ void CentralBureaucracy::doBureaucracy()
 
             if (i == 19)
                 check1 = true;
-            if (i== 19 && check1)
+            if (i == 19 && check1)
                 check2 = true;
 
             i = (i + 1) % 20;
         }
-        
+
         srand(time(NULL));
         int r = rand() % 3;
         if (r == 0)
