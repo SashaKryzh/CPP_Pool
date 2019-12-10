@@ -4,3 +4,4 @@ a.out
 *.replace
 replacer
 .DS_Store
+*_shrubbery
