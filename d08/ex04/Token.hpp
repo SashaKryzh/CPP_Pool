@@ -1,7 +1,7 @@
 #if !defined(TOKEN_HPP)
 #define TOKEN_HPP
 
-#include <ostream>
+#include <sstream>
 
 class IToken
 {
@@ -23,20 +23,46 @@ private:
     T _value;
 
 public:
-    Token(T value);
-    ~Token();
+    Token(T value) : _value(value) {}
+    ~Token() {}
 
-    Token(const Token<T> &);
-    Token &operator=(const Token<T> &);
+    Token(const Token<T> &src) { operator=(src); }
+    Token &operator=(const Token<T> &src)
+    {
+        if (this != &src)
+        {
+            _value = src._src;
+        }
+        return *this;
+    }
 
-    T getValue() const;
-    std::string toString() const;
+    T getValue() const { return _value; }
+    std::string toString() const { return "hz"; }
 };
 
-#include "Token.ipp"
+template<>
+inline std::string Token<char>::toString() const
+{
+    std::stringstream ss;
+    ss << "Op(" << _value << ")";
+    return ss.str();
+}
 
-// std::ostream &operator<<(std::ostream &os, const Token<char> &dt);
-// std::ostream &operator<<(std::ostream &os, const Token<int> &dt);
-// std::ostream &operator<<(std::ostream &os, const Token<Paren> &dt);
+template<>
+inline std::string Token<int>::toString() const
+{
+    std::stringstream ss;
+    ss << "Num(" << _value << ")";
+    return ss.str();
+}
+
+template<>
+inline std::string Token<Paren>::toString() const
+{
+    if (_value._c == '(')
+        return "ParOpen";
+    else
+        return "ParClose";
+}
 
 #endif // TOKEN_HPP

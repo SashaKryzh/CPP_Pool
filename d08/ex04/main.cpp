@@ -49,7 +49,7 @@ int main(int ac, char *av[])
     Token<int> token(43);
     for (size_t i = 0; i < tokens.size(); ++i)
     {
-        std::cout << tokens[i]->toString() << " ";
+        // std::cout << tokens[i]->toString() << " ";
     }
 
     return 0;
