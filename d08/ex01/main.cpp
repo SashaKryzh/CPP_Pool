@@ -32,6 +32,10 @@ int main()
     std::cout << s2.shortestSpan() << std::endl;
     std::cout << s2.longestSpan() << std::endl;
 
+    Span s3(s2);
+    std::cout << s2.shortestSpan() << std::endl;
+    std::cout << s2.longestSpan() << std::endl;
+
     try
     {
         Span s3(10);
