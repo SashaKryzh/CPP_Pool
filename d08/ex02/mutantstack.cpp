@@ -17,6 +17,7 @@ MutantStack<T> &MutantStack<T>::operator=(const MutantStack<T> &src)
 {
     if (this != &src)
     {
+        _c = src._c;
     }
     return *this;
 }
@@ -24,13 +25,13 @@ MutantStack<T> &MutantStack<T>::operator=(const MutantStack<T> &src)
 template <class T>
 T &MutantStack<T>::top()
 {
-    return _c.back();
+    return _c.front();
 }
 
 template <class T>
 T const &MutantStack<T>::top() const
 {
-    return _c.back();
+    return _c.front();
 }
 
 template <class T>
@@ -48,13 +49,13 @@ typename std::list<T>::size_type MutantStack<T>::size() const
 template <class T>
 void MutantStack<T>::push(const T &value)
 {
-    _c.push_back(value);
+    _c.push_front(value);
 }
 
 template <class T>
 void MutantStack<T>::pop()
 {
-    _c.pop_back();
+    _c.pop_front();
 }
 
 template <class T>
