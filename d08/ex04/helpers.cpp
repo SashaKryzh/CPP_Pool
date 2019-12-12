@@ -8,7 +8,7 @@ void errorExit(std::string message)
 
 void displayTokens(std::vector<IToken *> tokens)
 {
-    std::cout << "Tokens: ";
+    std::cout << "Tokens:";
     for (size_t i = 0; i < tokens.size(); ++i)
     {
         std::cout << " " << tokens[i]->toString();
@@ -18,7 +18,7 @@ void displayTokens(std::vector<IToken *> tokens)
 
 void displayPostfix(std::queue<IToken *> postfix)
 {
-    std::cout << "Postfix: ";
+    std::cout << "Postfix:";
     while (!postfix.empty())
     {
         std::cout << " " << postfix.front()->toString();

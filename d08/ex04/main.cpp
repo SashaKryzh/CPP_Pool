@@ -81,9 +81,13 @@ std::queue<IToken *> toPostfix(std::vector<IToken *> tokens)
                 postfix.push(st.top());
                 st.pop();
             }
-            if (!st.empty())
+            if (!st.empty() && IS_OPEN_PAREN(st.top()))
             {
                 st.pop();
+            }
+            else
+            {
+                errorExit("Invalid number of parentheses");
             }
         }
 
@@ -117,7 +121,11 @@ Token<int> *applyOp(Token<char> *op, Token<int> *n1, Token<int> *n2)
     if (op->getValue() == '*')
         return new Token<int>(n1->getValue() * n2->getValue());
     if (op->getValue() == '/')
+    {
+        if (n2->getValue() == 0)
+            errorExit("Division by zero");
         return new Token<int>(n1->getValue() / n2->getValue());
+    }
     errorExit("How did you do it?!");
     return new Token<int>(-666);
 }
@@ -176,6 +184,8 @@ int main(int ac, char *av[])
         errorExit("Wrong number of arguments");
 
     std::vector<IToken *> tokens = parseTokens(av[1]);
+    if (!tokens.size())
+        errorExit("Where is equasion?");
     displayTokens(tokens);
     std::queue<IToken *> postfix = toPostfix(tokens);
     displayPostfix(postfix);
