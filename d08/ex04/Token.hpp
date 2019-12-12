@@ -3,6 +3,11 @@
 
 #include <sstream>
 
+#define IS_OPEN_PAREN(x) (dynamic_cast<Token<Paren>*>(x) && dynamic_cast<Token<Paren>*>(x)->getValue()._c == '(')
+#define IS_CLOSE_PAREN(x) (dynamic_cast<Token<Paren>*>(x) && dynamic_cast<Token<Paren>*>(x)->getValue()._c == ')')
+
+#define AS_OPER(x) (dynamic_cast<Token<char>*>(x))
+
 class IToken
 {
 public:
@@ -40,7 +45,25 @@ public:
     std::string toString() const { return "hz"; }
 };
 
-template<>
+// template <>
+// inline std::string Token<char>::getType() const
+// {
+//     return "op";
+// }
+
+// template <>
+// inline std::string Token<int>::getType() const
+// {
+//     return "num";
+// }
+
+// template <>
+// inline std::string Token<Paren>::getType() const
+// {
+//     return "paren";
+// }
+
+template <>
 inline std::string Token<char>::toString() const
 {
     std::stringstream ss;
@@ -48,7 +71,7 @@ inline std::string Token<char>::toString() const
     return ss.str();
 }
 
-template<>
+template <>
 inline std::string Token<int>::toString() const
 {
     std::stringstream ss;
@@ -56,7 +79,7 @@ inline std::string Token<int>::toString() const
     return ss.str();
 }
 
-template<>
+template <>
 inline std::string Token<Paren>::toString() const
 {
     if (_value._c == '(')
