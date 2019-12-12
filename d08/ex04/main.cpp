@@ -1,5 +1,7 @@
 #include "ex04.hpp"
 
+int g_token_with = 7;
+
 bool isOperator(char c)
 {
     if (c == '+' || c == '-' || c == '*' || c == '/')
@@ -9,10 +11,27 @@ bool isOperator(char c)
 
 int parseNum(std::string &s, size_t &i)
 {
-    int ret = std::stoi(&s[i]);
+    int ret;
+
+    try
+    {
+        ret = std::stoi(&s[i]);
+    }
+    catch (const std::exception &e)
+    {
+        errorExit(e.what());
+    }
+
+    int numLenght = 0;
     while (isdigit(s[i]))
+    {
+        numLenght++;
         i++;
+    }
     i--;
+
+    if (numLenght + 6 > g_token_with)
+        g_token_with = numLenght + 6;
     return ret;
 }
 
@@ -85,7 +104,70 @@ std::queue<IToken *> toPostfix(std::vector<IToken *> tokens)
         st.pop();
     }
 
+    checkParen(postfix);
     return postfix;
+}
+
+Token<int> *applyOp(Token<char> *op, Token<int> *n1, Token<int> *n2)
+{
+    if (op->getValue() == '+')
+        return new Token<int>(n1->getValue() + n2->getValue());
+    if (op->getValue() == '-')
+        return new Token<int>(n1->getValue() - n2->getValue());
+    if (op->getValue() == '*')
+        return new Token<int>(n1->getValue() * n2->getValue());
+    if (op->getValue() == '/')
+        return new Token<int>(n1->getValue() / n2->getValue());
+    errorExit("How did you do it?!");
+    return new Token<int>(-666);
+}
+
+int evaluatePostfix(std::queue<IToken *> postfix)
+{
+    std::stack<Token<int> *> st;
+
+    while (!postfix.empty())
+    {
+        std::stringstream d;
+        d << "I ";
+
+        IToken *token = postfix.front();
+        postfix.pop();
+
+        if (dynamic_cast<Token<int> *>(token))
+        {
+            st.push(dynamic_cast<Token<int> *>(token));
+            d << std::setw(g_token_with) << std::left << token->toString();
+            d << "| OP " << std::setw(10) << std::left << "Push";
+        }
+
+        else
+        {
+            if (st.size() < 2)
+                errorExit("Invalid number of operators");
+
+            Token<int> *num2 = st.top();
+            st.pop();
+            Token<int> *num1 = st.top();
+            st.pop();
+
+            d << std::setw(g_token_with) << std::left << token->toString();
+            d << "| OP ";
+            d << std::setw(10) << std::left << opDescription(dynamic_cast<Token<char>*>(token)->getValue());
+            st.push(applyOp(dynamic_cast<Token<char> *>(token), num1, num2));
+        }
+
+        d << stackToString(st);
+        std::cout << d.str() << std::endl;
+    }
+
+    int ret = st.top()->getValue();
+    st.pop();
+
+    if (!st.empty())
+        errorExit("Invalid number of ints");
+
+    return ret;
 }
 
 int main(int ac, char *av[])
@@ -97,6 +179,9 @@ int main(int ac, char *av[])
     displayTokens(tokens);
     std::queue<IToken *> postfix = toPostfix(tokens);
     displayPostfix(postfix);
+    int res = evaluatePostfix(postfix);
+
+    std::cout << "Result : " << res << std::endl;
 
     return 0;
 }

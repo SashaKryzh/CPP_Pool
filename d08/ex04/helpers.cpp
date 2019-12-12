@@ -27,6 +27,16 @@ void displayPostfix(std::queue<IToken *> postfix)
     std::cout << std::endl;
 }
 
+void checkParen(std::queue<IToken *> postfix)
+{
+    while (!postfix.empty())
+    {
+        if (dynamic_cast<Token<Paren> *> (postfix.front()))
+            errorExit("Invalid number of parentheses");
+        postfix.pop();
+    }
+}
+
 int prec(char c)
 {
     if (c == '*' || c == '/')
@@ -35,4 +45,31 @@ int prec(char c)
         return 1;
     else
         return -1;
+}
+
+std::string stackToString(std::stack<Token<int>*> st)
+{
+    std::stringstream ss;
+    ss << "| ST";
+    while (!st.empty())
+    {
+        ss << " " << st.top()->getValue();
+        st.pop();
+    }
+    ss << "]";
+    return ss.str();
+}
+
+std::string opDescription(char c)
+{
+    if (c == '+')
+        return "Add";
+    if (c == '-')
+        return "Substract";
+    if (c == '*')
+        return "Multiply";
+    if (c == '/')
+        return "Divide";
+    errorExit("How did you do it?!");
+    return "";
 }
